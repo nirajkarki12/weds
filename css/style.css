@@ -1,0 +1,51 @@
+/*!
+ * Start Bootstrap - Modern Business (https://startbootstrap.com/template-overviews/modern-business)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-logomodern-business-nav/blob/master/LICENSE)
+ */
+
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.carousel-item {
+  height: 65vh;
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+/*social media icons*/
+.social .socialTitle {
+  text-align: center;
+  line-height: 300%;
+}
+.social .socialButtons a {
+  color: white; // In yourUse @body-bg 
+  opacity:0.9;
+}
+.social .socialButtons a:hover {
+    color: white;
+  opacity:1;      
+}
+.social .col-sm-2 a{ background-color: #FFF }
+.social .socialButtons .social_btn-facebook {background: #3b5998;border-color:#172d5e}
+.social .socialButtons .social_btn-twitter {background: #00aced;border-color:#043d52}
+.social .socialButtons .social_btn-google-plus {background: #c32f10;border-color:#6b1301; width:72px}
+.social .socialButtons .social_btn-pinterest {background: #cc2127;border-color:#780004}
+.social .socialButtons .social_btn-yahoo {background: #400191;border-color:#230052}
+.social .socialButtons .social_btn-linkedin {background: #0976b4;border-color:#004269}
+
