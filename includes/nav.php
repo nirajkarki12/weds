@@ -1,3 +1,6 @@
+<?php
+require_once('config/db.php');
+?>
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
@@ -7,38 +10,39 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="index.php">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="about.php">Our Story</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            What we deliver
+        <?php
+          $query = "SELECT * FROM pages WHERE parent = 0 ORDER BY position asc";
+          $result = db::getInstance()->dbquery($query);
+          while($res = $result->fetch_assoc()){
+          $id = $res['id'];
+          $child = false;
+          $url = ($res['url'] == 'home') ? '/mikal' : 'page/' . $res['url'];
+
+          $childQuery = "SELECT * FROM pages WHERE parent = '$id' ORDER BY position asc";
+          $childResult = db::getInstance()->dbquery($childQuery);
+          if($childResult->num_rows > 0){
+            $child = true;
+          }
+        ?>
+        <li class="nav-item <?php if($child){ echo 'dropdown';}?>">
+          <a class="nav-link <?php if($child){ echo 'dropdown-toggle';}?>" href="<?php if($child){ echo '#';}else echo $url;?>" id="<?php if($child){ echo $res['id'];}?>" <?php if($child){ ?> data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?php }?>>
+            <?= $res['title']?>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-            <a class="dropdown-item" href="full-width.php">Invites</a>
-            <a class="dropdown-item" href="full-width.php">Decor</a>
-            <a class="dropdown-item" href="full-width.php">Artist Management</a>
-            <a class="dropdown-item" href="full-width.php">Food & Beverages</a>
-            <a class="dropdown-item" href="full-width.php">Hospitality</a>
-            <a class="dropdown-item" href="full-width.php">Destinations</a>
+          <?php 
+            if($child){
+          ?>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="<?= $res['id']?>">
+            <?php 
+              while($childRes = $childResult->fetch_assoc()){
+            ?>
+            <a class="dropdown-item" href="page/<?= $childRes['url']?>"><?= $childRes['title']?></a>
+            <?php 
+              }
+            ?>
           </div>
+          <?php } ?>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="services.php">Expense Corner</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="contact.php">Our Wedding Work</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="contact.php">Attache</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="contact.php">Reach Us</a>
-        </li>
-        
+        <?php } ?>
       </ul>
     </div>
   </div>

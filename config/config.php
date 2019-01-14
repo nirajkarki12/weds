@@ -5,6 +5,7 @@ define('MYSQL_PASS', 'root');
 define('MYSQL_DB', 'mikal');
 define('PASSWORD_HASH', 's22Chrcte/Hl.0t1XkO');
 define('DEBUG_MODE',true);
+define('SITE_URL', 'http://localhost/mikal/');
 
 if(DEBUG_MODE){
     error_reporting(E_ALL | E_STRICT);

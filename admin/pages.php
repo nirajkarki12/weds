@@ -90,7 +90,6 @@ if(!isset($_SESSION['loggedIn'])){
                     $result = db::getInstance()->dbquery($query);
                     while($res = $result->fetch_assoc()){
                     $id = $res['id'];
-
                   ?>
                     <tr>
                       <td><?= $res['title']?></td>
@@ -109,10 +108,10 @@ if(!isset($_SESSION['loggedIn'])){
                       </td>
                     </tr>
                   <?php 
-                  $childQuery = "SELECT * FROM pages WHERE parent = '$id' ORDER BY position asc";
-                  $childResult = db::getInstance()->dbquery($childQuery);
-                  while($childRes = $childResult->fetch_assoc()){
-                    ?>
+                    $childQuery = "SELECT * FROM pages WHERE parent = '$id' ORDER BY position asc";
+                    $childResult = db::getInstance()->dbquery($childQuery);
+                    while($childRes = $childResult->fetch_assoc()){
+                  ?>
                     <tr class="table-secondary">
                       <td><i class="fas fa-angle-double-right"></i> <?= $childRes['title']?></td>
                       <td><?= $childRes['content']?></td>
