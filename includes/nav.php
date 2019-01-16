@@ -2,7 +2,7 @@
 require_once('config/db.php');
 ?>
 <!-- Navigation -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="index.php">Logo</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +16,7 @@ require_once('config/db.php');
           while($res = $result->fetch_assoc()){
           $id = $res['id'];
           $child = false;
-          $url = ($res['url'] == 'home') ? '/mikal' : 'page/' . $res['url'];
+          $url = ($res['url'] == 'home') ? '/mikal' : 'page.php?slug=' . $res['url'];
 
           $childQuery = "SELECT * FROM pages WHERE parent = '$id' ORDER BY position asc";
           $childResult = db::getInstance()->dbquery($childQuery);
@@ -35,7 +35,7 @@ require_once('config/db.php');
             <?php 
               while($childRes = $childResult->fetch_assoc()){
             ?>
-            <a class="dropdown-item" href="page/<?= $childRes['url']?>"><?= $childRes['title']?></a>
+            <a class="dropdown-item" href="page.php?slug=<?= $childRes['url']?>"><?= $childRes['title']?></a>
             <?php 
               }
             ?>

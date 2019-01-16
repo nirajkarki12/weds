@@ -67,5 +67,5 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo SITE_URL;?>vendor/jquery/jquery.min.js"></script>
+<script src="<?php echo SITE_URL;?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

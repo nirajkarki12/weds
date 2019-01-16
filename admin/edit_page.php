@@ -23,9 +23,10 @@ if(isset($_POST['submit'])){
   $parent = db::getInstance()->escapeString($_POST['parent']);
   $content = db::getInstance()->escapeString($_POST['content']);
   $position = db::getInstance()->escapeString($_POST['position']);
+  $url = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
 
   $msg = '';
-  $query = "UPDATE pages SET title = '$title', parent = '$parent', content = '$content', position = '$position' WHERE id = '$id'";
+  $query = "UPDATE pages SET title = '$title', parent = '$parent', content = '$content', position = '$position', url = '$url' WHERE id = '$id'";
   if(db::getInstance()->dbquery($query)){
     $msg = "Page updated successfully";
     $status = "success";

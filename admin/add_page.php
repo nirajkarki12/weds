@@ -12,9 +12,10 @@ if(isset($_POST['submit'])){
   $parent = db::getInstance()->escapeString($_POST['parent']);
   $content = db::getInstance()->escapeString($_POST['content']);
   $position = db::getInstance()->escapeString($_POST['position']);
+  $url = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
 
   $msg = '';
-  $query = "INSERT INTO pages (title, parent, content, position) VALUES ('$title', '$parent', '$content', '$position')";
+  $query = "INSERT INTO pages (title, parent, content, position, url) VALUES ('$title', '$parent', '$content', '$position', '$url')";
   if(db::getInstance()->dbquery($query)){
     $msg = "Page added successfully";
     $status = "success";

@@ -1,4 +1,4 @@
-RewriteEngine On
-RewriteBase /mikal
+#RewriteEngine On
+#RewriteBase /mikal
 
-RewriteRule ^page/(.*)$ page.php?slug=$1 [L]
+#RewriteRule ^page/(.*)$ page.php?slug=$1 [L]

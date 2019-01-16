@@ -93,7 +93,7 @@ if(!isset($_SESSION['loggedIn'])){
                   ?>
                     <tr>
                       <td><?= $res['title']?></td>
-                      <td><?php if(strtolower($res['title']) !== 'home'){ echo $res['content']; } else echo "-";?></td>
+                      <td><?php if(strtolower($res['title']) !== 'home'){ echo strlen(strip_tags($res['content'])) > 70 ? substr(strip_tags($res['content']), 0, 70)."..." : strip_tags($res['content']); } else echo "-";?></td>
                       <td><?php if(strtolower($res['title']) !== 'home'){ echo $res['position']; } else echo "-";?></td>
                       <td>
                         <?php if(strtolower($res['title']) !== 'home'){ ?>
@@ -114,7 +114,7 @@ if(!isset($_SESSION['loggedIn'])){
                   ?>
                     <tr class="table-secondary">
                       <td><i class="fas fa-angle-double-right"></i> <?= $childRes['title']?></td>
-                      <td><?= $childRes['content']?></td>
+                      <td><?= strlen(strip_tags($childRes['content'])) > 70 ? substr(strip_tags($childRes['content']), 0, 70)."..." : strip_tags($childRes['content'])?></td>
                       <td><?= $childRes['position']?></td>
                       <td>
                         <a href="edit_page.php?id=<?= $childRes['id']?>" title="Edit Page">

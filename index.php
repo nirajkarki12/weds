@@ -13,11 +13,11 @@ require_once('config/db.php');
     <title>The Weds Works</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo SITE_URL;?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo SITE_URL;?>vendor/font-awesome/css/font-awesome.min.css">
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="<?php echo SITE_URL;?>css/style.css" rel="stylesheet">
 
   </head>
 
