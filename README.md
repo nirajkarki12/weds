@@ -1,3 +1,4 @@
 # The Wed Works
-Use database db.sql, Create one and import
-User MD5 password
+Create database and import db.sql on it
+
+## Use MD5 password
