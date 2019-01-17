@@ -109,7 +109,7 @@ if(isset($_POST['submit'])){
             </div>
             <div class="form-group">
               <label for="position">Position</label>
-              <input type="number" class="form-control" id="position" min="2" max="50" name="position" value="<?= $page['position']?>" placeholder="Position" required>
+              <input type="number" class="form-control" id="position" min="1" max="50" name="position" value="<?= $page['position']?>" placeholder="Position" required>
             </div>
             <input type="submit" name="submit" value="Save" class="btn btn-primary">
           </form>

@@ -69,6 +69,3 @@
 <!-- Bootstrap core JavaScript -->
 <script src="<?php echo SITE_URL;?>vendor/jquery/jquery.min.js"></script>
 <script src="<?php echo SITE_URL;?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Contact form JavaScript -->
-<script src="<?php echo SITE_URL;?>js/jqBootstrapValidation.js"></script>
-<script src="<?php echo SITE_URL;?>js/contact_me.js"></script>

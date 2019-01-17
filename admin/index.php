@@ -20,13 +20,13 @@ if(!isset($_SESSION['loggedIn'])){
     <title>Weds - Dashboard</title>
 
     <!-- Bootstrap core CSS-->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= SITE_URL?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom fonts-->
+    <link href="<?= SITE_URL?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Custom styles for this template-->
-    <link href="css/style.css" rel="stylesheet">
+    <!-- Custom styles-->
+    <link href="<?= SITE_URL?>admin/css/style.css" rel="stylesheet">
 
   </head>
 
@@ -46,89 +46,81 @@ if(!isset($_SESSION['loggedIn'])){
 
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="#">Dashboard</a>
+            <li class="breadcrumb-item active">
+              Dashboard
             </li>
-            <li class="breadcrumb-item active">Overview</li>
           </ol>
 
-          <!-- Icon Cards-->
-          <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-primary o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                    <i class="fas fa-fw fa-comments"></i>
-                  </div>
-                  <div class="mr-5">26 New Messages!</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
-                  <span class="float-left">View Details</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-warning o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                    <i class="fas fa-fw fa-list"></i>
-                  </div>
-                  <div class="mr-5">11 New Tasks!</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
-                  <span class="float-left">View Details</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-success o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
-                  </div>
-                  <div class="mr-5">123 New Orders!</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
-                  <span class="float-left">View Details</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-danger o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                    <i class="fas fa-fw fa-life-ring"></i>
-                  </div>
-                  <div class="mr-5">13 New Tickets!</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
-                  <span class="float-left">View Details</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Area Chart Example-->
           <div class="card mb-3">
             <div class="card-header">
-              <i class="fas fa-chart-area"></i>
-              Area Chart Example</div>
+              <i class="far fa-envelope-open"></i>
+              Messages</div>
             <div class="card-body">
-              <canvas id="myAreaChart" width="100%" height="30"></canvas>
+              <div class="table-responsive">
+                <table class="table" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Full Name</th>
+                      <th>Email</th>
+                      <th width="45%">Query</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                    $results_per_page = 10;
+                    $countQuery = "SELECT id FROM query_form";
+                    $result = db::getInstance()->dbquery($countQuery);
+                    $total = $result->num_rows;
+                    $num_pages = ceil($total / $results_per_page);
+
+                    $page = (isset($_GET['page']) && (int) $_GET['page'] > 0) ? (int) $_GET['page'] : 1;
+                    $startPoint = ($page * $results_per_page) - $results_per_page;
+
+                    $query = "SELECT * FROM query_form ORDER BY message_date desc LIMIT $startPoint, $results_per_page";
+                    $result = db::getInstance()->dbquery($query);
+                    while($res = $result->fetch_assoc()){
+                  ?>
+                    <tr>
+                      <td><?= $res['fullname']?></td>
+                      <td><?= $res['email']?></td>
+                      <td><?= $res['message']?></td>
+                      <td><?= $res['message_date']?></td>
+                    </tr>
+                  <?php } ?>
+                  </tbody>
+                </table>
+                <?php if($num_pages > 1){?>
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                      <?php if($page > 1){ ?>
+                        <li class="page-item">
+                          <a class="page-link" href="index.php?page=<?php echo $page - 1; ?>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                      <?php } ?>
+
+                      <?php for ($i = 1; $i <= $num_pages; $i++) { ?>
+                        <li class="page-item <?php if($page == $i){ echo 'active';}?>">
+                          <a class="page-link" href="<?php echo ($page == $i) ? 'javascript:void(0)' : 'index.php?page=' .$i; ?>">
+                            <?= $i?>
+                          </a>
+                        </li>
+                      <?php  }?>
+
+                      <?php if($page < $num_pages) {?>
+                        <li class="page-item">
+                          <a class="page-link" href="index.php?page=<?php echo $page + 1; ?>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      <?php }?>
+                    </ul>
+                  </nav>
+                <?php }?>
+              </div>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
 
         </div>

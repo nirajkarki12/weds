@@ -93,10 +93,11 @@ if(!isset($_SESSION['loggedIn'])){
                   ?>
                     <tr>
                       <td><?= $res['title']?></td>
-                      <td><?php if(strtolower($res['title']) !== 'home'){ echo strlen(strip_tags($res['content'])) > 70 ? substr(strip_tags($res['content']), 0, 70)."..." : strip_tags($res['content']); } else echo "-";?></td>
-                      <td><?php if(strtolower($res['title']) !== 'home'){ echo $res['position']; } else echo "-";?></td>
                       <td>
-                        <?php if(strtolower($res['title']) !== 'home'){ ?>
+                        <?= strlen(strip_tags($res['content'])) > 70 ? substr(strip_tags($res['content']), 0, 70)."..." : strip_tags($res['content']);?>
+                      </td>
+                      <td><?= $res['position'];?></td>
+                      <td>
                         <a href="edit_page.php?id=<?= $id?>" title="Edit Page">
                           <i class="far fa-edit"></i>
                         </a>
@@ -104,7 +105,6 @@ if(!isset($_SESSION['loggedIn'])){
                         <a href="delete_page.php?id=<?= $id?>" title="Delete Page" onclick="return confirm('Are you sure want to delete this page?');">
                           <i class="far fa-trash-alt"></i>
                         </a>
-                        <?php } else echo "-";?>
                       </td>
                     </tr>
                   <?php 

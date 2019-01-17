@@ -10,6 +10,9 @@ require_once('config/db.php');
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.php">Home</a>
+        </li>
         <?php
           $query = "SELECT * FROM pages WHERE parent = 0 ORDER BY position asc";
           $result = db::getInstance()->dbquery($query);
@@ -43,6 +46,9 @@ require_once('config/db.php');
           <?php } ?>
         </li>
         <?php } ?>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.php">Reach Us</a>
+        </li>
       </ul>
     </div>
   </div>
