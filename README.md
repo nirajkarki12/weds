@@ -1,4 +1,5 @@
 # The Wed Works
-Create database and import db.sql on it
+Create database and import `db.sql` on it
 
-## Use MD5 password
+### Use `MD5 password`
+### Modify `base_url` on `filemanager/config/config.php` and remove `*. /mikal/*`
